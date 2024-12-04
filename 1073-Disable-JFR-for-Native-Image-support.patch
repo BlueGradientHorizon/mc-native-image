@@ -1,0 +1,22 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: BlueGradientHorizon <safana53656@gmail.com>
+Date: Tue, 3 Dec 2024 21:38:35 +0300
+Subject: [PATCH] Disable JFR for Native Image support
+
+
+diff --git a/src/main/java/net/minecraft/util/profiling/jfr/JvmProfiler.java b/src/main/java/net/minecraft/util/profiling/jfr/JvmProfiler.java
+index f381405ff5c84b3b15cedbbd940bdba61f36c4c0..3f7497cd5502a178b7221f34e8b8d812c74d9ec8 100644
+--- a/src/main/java/net/minecraft/util/profiling/jfr/JvmProfiler.java
++++ b/src/main/java/net/minecraft/util/profiling/jfr/JvmProfiler.java
+@@ -15,9 +15,9 @@ import net.minecraft.world.level.chunk.storage.RegionStorageInfo;
+ import org.slf4j.Logger;
+ 
+ public interface JvmProfiler {
+-    JvmProfiler INSTANCE = (JvmProfiler)(Runtime.class.getModule().getLayer().findModule("jdk.jfr").isPresent()
++    JvmProfiler INSTANCE = /*(JvmProfiler)(Runtime.class.getModule().getLayer().findModule("jdk.jfr").isPresent()
+         ? JfrProfiler.getInstance()
+-        : new JvmProfiler.NoOpProfiler());
++        :*/ new JvmProfiler.NoOpProfiler()/*)*/;
+ 
+     boolean start(Environment instanceType);
+ 
